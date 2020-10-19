@@ -15,9 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var ProgressBar: UIProgressView!
     
     let eggCookTimes : [String : Int] = [
-        "Soft": 30,
-        "Medium": 42,
-        "Hard": 72
+        "Soft": 300,
+        "Medium": 420,
+        "Hard": 720
     ]
     
     var timeRemaining : Int = 60
