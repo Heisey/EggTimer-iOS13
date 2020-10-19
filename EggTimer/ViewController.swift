@@ -12,20 +12,25 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var Heading: UILabel!
     
+    @IBOutlet weak var ProgressBar: UIProgressView!
+    
     let eggCookTimes : [String : Int] = [
-        "Soft": 300,
-        "Medium": 420,
-        "Hard": 720
+        "Soft": 30,
+        "Medium": 42,
+        "Hard": 72
     ]
     
-    var timeRemaining = 60
+    var timeRemaining : Int = 60
     
     var timer = Timer()
+    
+    var hardness : String = "unknow"
 
     @IBAction func hardnessSelected(_ sender: UIButton) {
+        Heading.text = "How do you like your eggs?"
         timer.invalidate()
         
-        let hardness : String = sender.currentTitle!
+        hardness = sender.currentTitle!
         
         if hardness == "Soft" {
             timeRemaining = eggCookTimes[hardness]!
@@ -42,9 +47,9 @@ class ViewController: UIViewController {
     
     @objc func updateTimer() {
         if timeRemaining > 0 {
-            Heading.text = "\(timeRemaining)"
-            print(timeRemaining)
             timeRemaining -= 1
+            let timePassed : Int = eggCookTimes[hardness]! - timeRemaining
+            ProgressBar.progress = Float(timePassed) / Float(eggCookTimes[hardness]!)
         } else if timeRemaining == 0 {
             timer.invalidate()
             Heading.text = "DONE"
